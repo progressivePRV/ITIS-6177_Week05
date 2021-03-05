@@ -193,29 +193,29 @@ function san_val_post_company(req, res, next) {
 }
 
 app.post("/api/v1/company", san_val_post_company, (req, res) => {
-    // let query = "insert into company values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
-    // res.send(query);
+    let query = "insert into company(COMPANY_ID, COMPANY_NAME, COMPANY_CITY) values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
+    res.send(query);
 
-    pool
-    .getConnection()
-    .then((conn) => {
-        let query = "insert into company values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
-      conn
-        .query(query)
-        .then((rows) => {
-          conn.release();
-          res.json(rows);
-        })
-        .catch((err) => {
-          conn.release();
-          res.status(500).json(err);
-        });
-    })
-    .catch((err) => {
-      // res.status(500).json(err);
-      error_res = { error: { msg: "failed to connect database" } };
-      res.status(500).json(error_res);
-    });
+    // pool
+    // .getConnection()
+    // .then((conn) => {
+    //     let query = "insert into company values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
+    //   conn
+    //     .query(query)
+    //     .then((rows) => {
+    //       conn.release();
+    //       res.json(rows);
+    //     })
+    //     .catch((err) => {
+    //       conn.release();
+    //       res.status(500).json(err);
+    //     });
+    // })
+    // .catch((err) => {
+    //   // res.status(500).json(err);
+    //   error_res = { error: { msg: "failed to connect database" } };
+    //   res.status(500).json(error_res);
+    // });
 });
 
 //----------------------------------------------- POST end points end
