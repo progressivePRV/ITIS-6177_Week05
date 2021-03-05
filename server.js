@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const mariadb = require("mariadb");
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+// const swaggerJsDoc = require("swagger-jsdoc");
+// const swaggerUi = require("swagger-ui-express");
 
 const pool = mariadb.createPool({
   host: "localhost",
