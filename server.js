@@ -219,7 +219,7 @@ app.post("/api/v1/company", san_val_post_company, (req, res) => {
 
 //----------------------------------------------- PATCH end points end
 // sanitaization and validation 
-function san_val_post_company(req, res, next) {
+function san_val_patch_company(req, res, next) {
     let errors = [];
   
     // checking if request contains body and all necessary paramters
