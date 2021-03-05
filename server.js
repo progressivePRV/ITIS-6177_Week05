@@ -165,14 +165,14 @@ function san_val_post_company(req, res, next) {
     req.body.COMPANY_CITY
   ) {
     //checking if COMPANY_ID is number
-    let i = req.body.COMPANY_ID;
+    let i = req.body.COMPANY_ID.trim();
     i = parseInt(i);
     if (!i) {
       errors.push({ msg: "COMPANY_ID should be integer" });
     }
 
     // checking if city name contians numbers
-    i = req.body.COMPANY_CITY;
+    i = req.body.COMPANY_CITY.trim();
     regex_for_number = /\d/;
     if (regex_for_number.test(i)) {
       errors.push({ msg: "COMPANY_CITY should not contain integers" });
@@ -193,10 +193,13 @@ function san_val_post_company(req, res, next) {
 }
 
 app.post("/api/v1/company", san_val_post_company, (req, res) => {
+    // let query = "insert into company values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
+    // res.send(query);
+
     pool
     .getConnection()
     .then((conn) => {
-        let query = "insert into company values("+req.body.COMPANY_ID+","+req.body.COMPANY_NAME+","+req.body.COMPANY_CITY+")";
+        let query = "insert into company values("+req.body.COMPANY_ID.trim()+","+req.body.COMPANY_NAME.trim()+","+req.body.COMPANY_CITY.trim()+")";
       conn
         .query(query)
         .then((rows) => {
@@ -344,7 +347,7 @@ app.delete("/api/v1/company/:id", san_val_del_company, (req, res) => {
   pool
     .getConnection()
     .then((conn) => {
-      let query = "DELETE FROM company WHERE id COMPANY_ID=" + req.params.id;
+      let query = "DELETE FROM company WHERE COMPANY_ID=" + req.params.id;
       conn
         .query(query)
         .then((rows) => {
