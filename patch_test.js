@@ -112,7 +112,8 @@ app.patch("/api/v1/company",san_val_patch_company, (req, res) => {
                         .catch((err) => {
                             conn.release();
                             let output = {}
-                            output.msg = '(company with given id exists)for more information goto URL=>"https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-error-sqlstates.html#:~:text=mysql%20error%20number%20mysql%20error%20name%20sql%20standard,er_no_db_error%3A%203d000%3A%201047%3A%20er_unknown_com_error%3A%2008s01%3A%201048%3A%20er_bad_null_error%3A%2023000"'
+                            output.query_used=query_update;
+                            output.msg = '(company with given id exists)for more information goto URL=>"https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-error-sqlstates.html#:~:text=mysql%20error%20number%20mysql%20error%20name%20sql%20standard,er_no_db_error%3A%203d000%3A%201047%3A%20er_unknown_com_error%3A%2008s01%3A%201048%3A%20er_bad_null_error%3A%2023000"';
                             output.database_output = err;
                             res.json({ errors: output });
                         });
