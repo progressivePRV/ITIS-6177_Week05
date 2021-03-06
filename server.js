@@ -352,11 +352,19 @@ app.delete("/api/v1/company/:id", san_val_del_company, (req, res) => {
         .query(query)
         .then((rows) => {
           conn.release();
-          res.json(rows);
+          let output = {}
+          if(rows.affectedRows>0){
+                output.msg = "Successful";
+          }
+          output.database_output = rows;
+          res.json(output);
         })
         .catch((err) => {
           conn.release();
-          res.status(500).json(err);
+          let output = {}
+          output.msg = 'for more information <a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-error-sqlstates.html#:~:text=mysql%20error%20number%20mysql%20error%20name%20sql%20standard,er_no_db_error%3A%203d000%3A%201047%3A%20er_unknown_com_error%3A%2008s01%3A%201048%3A%20er_bad_null_error%3A%2023000" >click here</a>'
+          output.database_output = rows;
+          res.json(output);
         });
     })
     .catch((err) => {
