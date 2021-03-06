@@ -309,7 +309,7 @@ app.patch("/api/v1/company", san_val_patch_company, (req, res) => {
     pool
         .getConnection()
         .then((conn) => {
-            let query = "select * from COMPANY_ID=" + req.params.id.trim();
+            let query = "select * from company where COMPANY_ID=" + req.params.id.trim();
             conn
                 .query(query)
                 .then((rows) => {
