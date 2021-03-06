@@ -41,7 +41,8 @@ function san_val_patch_company(req, res, next) {
     if (
         req.body &&
         req.body.COMPANY_ID &&
-        (req.body.COMPANY_NAME || req.body.COMPANY_CITY)
+        (req.body.COMPANY_NAME ||
+             req.body.COMPANY_CITY)
     ) {
         //checking if COMPANY_ID is number
         let i = req.body.COMPANY_ID.trim();
@@ -76,7 +77,7 @@ function san_val_patch_company(req, res, next) {
     }
 }
 
-app.patch("/api/v1/company", (req, res) => {
+app.patch("/api/v1/company",san_val_patch_company, (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
     pool
         .getConnection()
