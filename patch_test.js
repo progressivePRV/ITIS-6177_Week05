@@ -77,7 +77,7 @@ function san_val_put_company(req, res, next) {
     }
 }
 
-app.patch("/api/v1/company/:COMPANY_ID",san_val_patch_company, (req, res) => {
+app.patch("/api/v1/company/:COMPANY_ID",san_val_put_company, (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
     pool
         .getConnection()
