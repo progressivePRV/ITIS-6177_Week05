@@ -26,7 +26,7 @@ const SwaggerOptions = {
         host: 'localhost:3000',
         basePath: '/',
     },
-    apis:['./swagger_example.js']
+    apis:['./server.js']
 };
 
 const specs = swaggerJsDoc(SwaggerOptions);
@@ -49,7 +49,7 @@ app.use(express.json());
 
 /**
  * @swagger
- * /:
+ * /home:
  *     get:
  *      description: This is just home endpoint to wheather server is running or not. 
  *      produces:
