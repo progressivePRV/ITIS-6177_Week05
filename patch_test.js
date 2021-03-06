@@ -91,10 +91,10 @@ app.patch("/api/v1/company",san_val_patch_company, (req, res) => {
                     // id exists
                     let query_update = "update company set ";
                     if (req.body.COMPANY_NAME) {
-                        query_update += "COMPANY_NAME=" + req.body.COMPANY_NAME.trim() + " ";
+                        query_update += "COMPANY_NAME='" + req.body.COMPANY_NAME.trim() + "' ";
                     }
                     if (req.body.COMPANY_CITY) {
-                        query_update += "COMPANY_CITY=" + req.body.COMPANY_CITY.trim() + " ";
+                        query_update += "COMPANY_CITY='" + req.body.COMPANY_CITY.trim() + "' ";
                     }
                     query_update += "where COMPANY_ID=" + req.body.COMPANY_ID.trim();
                     conn.query(query_update)
