@@ -49,7 +49,7 @@ app.use(express.json());
 
 /**
  * @swagger
- * /home:
+ * /:
  *     get:
  *      description: This is just home endpoint to wheather server is running or not. 
  *      produces:
@@ -64,6 +64,18 @@ app.get("/", (req, res) => {
 });
 
 //----------------- Get end points start
+
+/**
+ * @swagger
+ * /api/v1/student:
+ *     get:
+ *      description: This will retrive every student information from the student Table. 
+ *      produces:
+ *          - application/json:
+ *      responses:
+ *          200:
+ *              description: It will return json array of student objects
+ */
 
 //  to get every student present in student table
 app.get("/api/v1/student", (req, res) => {
@@ -88,6 +100,25 @@ app.get("/api/v1/student", (req, res) => {
         });
 });
 
+
+/**
+ * @swagger
+ * /api/v1/student/:name:
+ *     get:
+ *      description: This will retrive every student information from the student Table. 
+ *      produces:
+ *          - application/json:
+ *      parameters:
+ *       - name: name
+ *         in: parameter
+ *         description: Name of the student. 
+ *         required: true
+ *         type: string
+ *      responses:
+ *          200:
+ *              description: It will return json array of student object, if there is no student with given name then it will return empty array.
+ *
+ */
 // to get student by name
 app.get("/api/v1/student/:name", (req, res) => {
     if (req.params.name) {
@@ -116,6 +147,37 @@ app.get("/api/v1/student/:name", (req, res) => {
     }
 });
 
+// @swagger
+// paths:
+//   /api/v1/company/{id}:
+//     get:
+//       parameters:
+//         - in: path
+//           name: COMPANY_ID   # Note the name is the same as in the path
+//           required: true
+//           schema:
+//             type: string
+//             minimum: 1
+//           description: it will look for COMPANY_ID
+
+/**
+ * @swagger
+ * /api/v1/company/:{id}:
+ *     get:
+ *      description: This will retrive every student information from the student Table. 
+ *      produces:
+ *          - application/json:
+ *      parameters:
+ *       - name: COMPANY_ID  
+ *         in: parameter
+ *         description: Name of the student. 
+ *         required: true
+ *         type: string
+ *      responses:
+ *          200:
+ *              description: It will return json array of student object, if there is no student with given name then it will return empty array.
+ *
+ */
 //get company by id
 app.get("/api/v1/company/:id", (req, res) => {
     if (req.params.id) {
