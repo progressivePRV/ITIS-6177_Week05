@@ -595,7 +595,7 @@ function san_val_del_company(req, res, next) {
  * @swagger
  * /api/v1/company/{id}:
  *     delete:
- *      description: This will retrive company information with id={id} from the company Table. 
+ *      description: This will delete the company's information with id={id} from the company Table. 
  *      produces:
  *          - application/json
  *      parameters:
@@ -704,6 +704,7 @@ function san_val_put_company(req, res, next) {
  *              - in: path
  *                name: id
  *                description: The company_id to be update/inserted
+ *                required: true
  *              - in: body
  *                name: company
  *                description: the company to create
