@@ -276,9 +276,10 @@ function san_val_patch_company(req, res, next) {
 
 app.patch("/api/v1/company", san_val_patch_company, (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
+
     pool
-      .getConnection()
-      .then((conn) => {
+    .getConnection()
+    .then((conn) => {
         let query = "select * from COMPANY_ID=" + req.params.id.trim();
         conn
           .query(query)
