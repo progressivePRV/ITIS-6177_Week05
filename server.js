@@ -238,8 +238,8 @@ function san_val_patch_company(req, res, next) {
     // checking if request contains body and all necessary paramters
     if (
       req.body &&
-      req.body.COMPANY_ID ||
-      (req.body.COMPANY_NAME && req.body.COMPANY_CITY)
+      req.body.COMPANY_ID &&
+      (req.body.COMPANY_NAME || req.body.COMPANY_CITY)
     ) {
       //checking if COMPANY_ID is number
       let i = req.body.COMPANY_ID.trim();
