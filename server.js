@@ -92,7 +92,7 @@ app.get("/api/v1/company/:id", (req, res) => {
             .getConnection()
             .then((conn) => {
                 conn
-                    .query("select * from company where name=?", req.params.id)
+                    .query("select * from company where COMPANY_ID=?", req.params.id)
                     .then((rows) => {
                         conn.release();
                         res.json(rows);

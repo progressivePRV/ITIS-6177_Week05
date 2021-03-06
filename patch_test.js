@@ -32,9 +32,9 @@ app.get("/", (req, res) => {
 });
 
 
-//----------------------------------------------- PATCH end points end
+//----------------------------------------------- PUT end points end
 // sanitaization and validation 
-function san_val_patch_company(req, res, next) {
+function san_val_put_company(req, res, next) {
     let errors = [];
 
     // checking if request contains body and all necessary paramters
@@ -77,7 +77,7 @@ function san_val_patch_company(req, res, next) {
     }
 }
 
-app.patch("/api/v1/company",san_val_patch_company, (req, res) => {
+app.patch("/api/v1/company/",san_val_patch_company, (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
     pool
         .getConnection()
@@ -133,7 +133,7 @@ app.patch("/api/v1/company",san_val_patch_company, (req, res) => {
         });
 });
 
-//----------------------------------------------- PATCH end points end
+//----------------------------------------------- PUT end points end
 
 app.listen(port, () => {
     console.log("Example app listening on", port);
