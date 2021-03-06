@@ -45,7 +45,7 @@ function san_val_put_company(req, res, next) {
              req.body.COMPANY_CITY)
     ) {
         //checking if COMPANY_ID is number
-        let i = req.body.COMPANY_ID.trim();
+        let i = req.params.COMPANY_ID.trim();
         i = parseInt(i);
         if (!i) {
             errors.push({ msg: "COMPANY_ID should be integer" });
@@ -77,7 +77,7 @@ function san_val_put_company(req, res, next) {
     }
 }
 
-app.patch("/api/v1/company/:COMPANY_ID",san_val_put_company, (req, res) => {
+app.put("/api/v1/company/:COMPANY_ID",san_val_put_company, (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
     pool
         .getConnection()
