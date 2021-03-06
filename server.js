@@ -146,19 +146,20 @@ app.get("/api/v1/student/:name", (req, res) => {
         );
     }
 });
-
-// @swagger
-// paths:
-//   /api/v1/company/{id}:
-//     get:
-//       parameters:
-//         - in: path
-//           name: COMPANY_ID   # Note the name is the same as in the path
-//           required: true
-//           schema:
-//             type: string
-//             minimum: 1
-//           description: it will look for COMPANY_ID
+/*
+* @swagger
+* paths:
+*   /api/v1/company/{id}:
+*     get:
+*       parameters:
+*         - in: path
+*           name: COMPANY_ID   # Note the name is the same as in the path
+*           required: true
+*          schema:
+*             type: string
+*             minimum: 1
+*           description: it will look for COMPANY_ID
+*/
 
 /**
  * @swagger
