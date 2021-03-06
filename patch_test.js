@@ -76,12 +76,13 @@ function san_val_patch_company(req, res, next) {
     }
 }
 
-app.patch("/api/v1/company", san_val_patch_company, (req, res) => {
+app.patch("/api/v1/company", (req, res) => {
     // res.send("you asked to delete company with id="+req.params.id);
     pool
         .getConnection()
         .then((conn) => {
-            let query = "select * from company where COMPANY_ID=" + req.params.id.trim();
+            // let query = "select * from company where COMPANY_ID=" + req.params.id.trim();
+            let query = "select * from company where COMPANY_ID=" + "10";
             conn
                 .query(query)
                 .then((rows) => {
