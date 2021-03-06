@@ -139,3 +139,7 @@ app.patch("/api/v1/company", san_val_patch_company, (req, res) => {
 });
 
 //----------------------------------------------- PATCH end points end
+
+app.listen(port, () => {
+    console.log("Example app listening on", port);
+});
