@@ -76,7 +76,6 @@ app.get("/", (req, res) => {
  *          200:
  *              description: It will return json array of student objects
  */
-
 //  to get every student present in student table
 app.get("/api/v1/student", (req, res) => {
     pool
@@ -146,31 +145,18 @@ app.get("/api/v1/student/:name", (req, res) => {
         );
     }
 });
-/*
-* @swagger
-* paths:
-*   /api/v1/company/{id}:
-*     get:
-*       parameters:
-*         - in: path
-*           name: COMPANY_ID   # Note the name is the same as in the path
-*           required: true
-*          schema:
-*             type: string
-*             minimum: 1
-*           description: it will look for COMPANY_ID
-*/
+
 
 /**
  * @swagger
- * /api/v1/company/:{id}:
+ * /api/v1/company/{id}:
  *     get:
  *      description: This will retrive every student information from the student Table. 
  *      produces:
  *          - application/json:
  *      parameters:
- *       - name: COMPANY_ID  
- *         in: parameter
+ *       - name: id  
+ *         in: path
  *         description: Name of the student. 
  *         required: true
  *         type: string
@@ -207,7 +193,17 @@ app.get("/api/v1/company/:id", (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /api/v1/agents:
+ *     get:
+ *      description: This will retrive every agents information from the agent Table. 
+ *      produces:
+ *          - application/json:
+ *      responses:
+ *          200:
+ *              description: It will return json array of agents objects
+ */
 // to get every agent in table
 app.get("/api/v1/agents", (req, res) => {
     pool
@@ -229,6 +225,17 @@ app.get("/api/v1/agents", (req, res) => {
         });
 });
 
+/**
+ * @swagger
+ * /api/v1/customer:
+ *     get:
+ *      description: This will retrive every customer information from the agent Table. 
+ *      produces:
+ *          - application/json:
+ *      responses:
+ *          200:
+ *              description: It will return json array of customer objects
+ */
 // to get every cutsomer present in table
 app.get("/api/v1/customer", (req, res) => {
     pool
@@ -253,6 +260,24 @@ app.get("/api/v1/customer", (req, res) => {
 
 
 //----------------- General end point to get every table content
+/**
+ * @swagger
+ * /api/table/:tab_name:
+ *     get:
+ *      description: This will retrive every student information from the student Table. 
+ *      produces:
+ *          - application/json:
+ *      parameters:
+ *       - name: tab_name  
+ *         in: path
+ *         description: Name of the table. 
+ *         required: true
+ *         type: string
+ *      responses:
+ *          200:
+ *              description: It will return json array of rows as json objects of given table name.
+ *
+ */
 app.get("/api/table/:tab_name", (req, res) => {
     pool
         .getConnection()
@@ -315,6 +340,25 @@ function san_val_post_company(req, res, next) {
         next();
     }
 }
+
+/* @swagger
+ * /api/v1/company:
+ *     post:
+ *          description: This will store new company information/data in to the company table. 
+ *          produces:
+ *              - application/json:
+ *          requestBody:
+ *              description: this excpects Json object with column name as key/parameter and row data as value
+ *              required: true
+ *              content:
+ *                   application/json:
+ *                      schema:
+ *                      $ref: '#/components/schemas/Pet' 
+ *          responses:
+ *          200:
+ *              description: It will return json array of rows as json objects of given table name.
+ * */
+
 
 app.post("/api/v1/company", san_val_post_company, (req, res) => {
     // let query = "insert into company(COMPANY_ID, COMPANY_NAME, COMPANY_CITY) values('"+req.body.COMPANY_ID.trim()+"','"+req.body.COMPANY_NAME.trim()+"','"+req.body.COMPANY_CITY.trim()+"')";
