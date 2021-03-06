@@ -209,7 +209,7 @@ function san_val_post_company(req, res, next) {
     } else {
         errors.push({
             msg:
-                "post request should have Json body with 3 parameters, namely COMPANY_ID, COMPANY_NAME and COMPANY_CITY",
+                "post request should have Json body with 3 parameters with their valuse, namely COMPANY_ID, COMPANY_NAME and COMPANY_CITY",
         });
     }
 
@@ -291,7 +291,7 @@ function san_val_patch_company(req, res, next) {
     } else {
         errors.push({
             msg:
-                "Patch request should atleat have a Json body with 2 parameters, namely COMPANY_ID and (COMPANY_NAME or COMPANY_CITY)",
+                "Patch request should atleat have a Json body with 2 parameters and there values, namely COMPANY_ID and (COMPANY_NAME or COMPANY_CITY)",
         });
     }
 
