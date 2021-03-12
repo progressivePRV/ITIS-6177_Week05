@@ -5,6 +5,8 @@ const mariadb = require("mariadb");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const cors = require('cors');
+const e = require("express");
+const axios = require('axios').default;
 
 const pool = mariadb.createPool({
     host: "localhost",
@@ -787,6 +789,61 @@ app.put("/api/v1/company/:COMPANY_ID",san_val_put_company, (req, res) => {
 
 //----------------------------------------------- PUT end points end
 
+//----------------------------------------------- Addition of Assignment6 start
+/**
+ * @swagger
+ * /say:
+ *     get:
+ *          description: Internally it check if query paramters is provided or not. If provided, it will send the request to the googl cloud function. which will add prefix "Prabhav says " to the query string(keyword).  
+ *          produces:
+ *              - application/text
+ *          parameters:
+ *              - in: query
+ *                name: keyword
+ *                description: The keyword can take string values.
+ *                required: true
+ *              
+ *          responses:
+ *              200:
+ *                  description: It will returns newly generated text with prefix "Prabhav says " added to the query value.
+ *              400:
+ *                  description: It will send the error message describing query parameter is missing.
+ *              500:
+ *                  description: Internal server error. Most commonly occurs when server fails to connect the cloud function.
+ */
+
+app.get("/say",(req,res)=>{
+    let errors = [];
+    let err_bool = false;
+    let result = '';
+    if(req.query.keyword){
+        let query = "https://us-east1-gcp-experiments-302102.cloudfunctions.net/Say_keyword?keyword="+req.query.keyword
+        axios.get(query)
+        .then(response =>{
+            console.log('cloud function call successful.');
+            res.send(response.data);
+        })
+        .catch(err =>{
+            err_bool = true;
+            console.log('got an error while calling google cloud function (doing a cloud function call).');
+            console.log("err =>"+err);
+            res.statusCode = 500;
+            errors.push({'msg':'some error occurred wil calling the google cloud function.'})
+        }).then(()=>{
+            console.log('end of axios request.')
+        });
+    }else{
+        errors.push({'msg':'Please provide the query parameter "keyword" and its value.'})
+        res.statusCode = 400;
+        res.status(400).json({errors:errors});
+    }
+    if(err_bool){
+        res.json({errors:errors});
+    }
+    
+});
+
+//----------------------------------------------- Addition of Assignment6 end
 
 app.listen(port, () => {
     console.log("Example app listening on", port);
