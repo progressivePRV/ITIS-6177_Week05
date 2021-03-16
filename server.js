@@ -388,7 +388,7 @@ function san_val_post_company(req, res, next) {
  *                  description: returns Json object with msg ("successful or No change") and json object received from database.
  *              500:
  *                  description: Internal server error. Most commonly occurs when server fails to connect the database.
- *              409: 
+ *              400: 
  *                  description: returns Json object with error msg and json object received from database. It occurs beacuse of duplicate entry.
  */
 app.post("/api/v1/company", san_val_post_company, (req, res) => {
